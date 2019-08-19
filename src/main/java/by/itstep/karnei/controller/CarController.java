@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @RequestMapping("cars")
@@ -24,8 +25,15 @@ public class CarController {
 
     @PostMapping
     public String addOrUpdateCar(@Valid Car car, BindingResult bindingResult, Model model) {
-        model.addAttribute("oneCar", car);
-        carService.saveCar(car);
-        return "redirect:cars";
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("carsList",carService.getAll());
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("oneCar", car);
+            return "cars";
+        } else {
+            carService.saveCar(car);
+            return "redirect:cars";
+        }
     }
 }

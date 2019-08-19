@@ -13,7 +13,7 @@ public class CarService {
     CarRepo carRepo;
 
     public void saveCar(Car car) {
-        if (car.getCreatedDate() != null) {
+        if (car.getCreatedDate() == null) {
             car.setCreatedDate(LocalDateTime.now());
             car.setUpdatedDate(LocalDateTime.now());
             carRepo.save(car);
