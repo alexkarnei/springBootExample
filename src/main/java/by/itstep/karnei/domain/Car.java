@@ -1,6 +1,8 @@
 package by.itstep.karnei.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,11 +12,12 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "CREATEDDATE",updatable = false)
+    @Column(name = "CREATEDDATE", updatable = false)
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-
+    @NotBlank
     private String mark;
+    @NotBlank
     private String model;
 
     public Car() {
