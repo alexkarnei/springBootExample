@@ -12,16 +12,26 @@ public class CarService {
     @Autowired
     CarRepo carRepo;
 
-    public void saveCar(Car car) {
-        if (car.getCreatedDate() == null) {
-            car.setCreatedDate(LocalDateTime.now());
-            car.setUpdatedDate(LocalDateTime.now());
+    public boolean saveCar(Car car) {
+        if (carRepo.findByVin(car.getVin()) == null) {
             carRepo.save(car);
+            return true;
+        } else {
+            return false;
         }
     }
 
-
     public Iterable<Car> getAll() {
         return carRepo.findAll();
+    }
+
+    public void remove(Car removeCar) {
+        removeCar.setDeleted(true);
+        carRepo.save(removeCar);
+    }
+
+    public void repareCar(Car repareCar) {
+        repareCar.setDeleted(false);
+        carRepo.save(repareCar);
     }
 }

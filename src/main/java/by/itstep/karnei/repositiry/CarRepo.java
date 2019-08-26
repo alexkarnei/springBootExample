@@ -6,4 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface CarRepo extends CrudRepository<Car, Long> {
+
+    Car findByVin(String vin);
 }

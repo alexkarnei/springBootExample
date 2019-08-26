@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
@@ -18,8 +19,8 @@ public class Car extends AbstractEntity {
     @NotBlank(message = "Заполни поле")
     private String model;
 
-    @NotBlank(message = "Заполни поле")
-    private String registrationNumber;
+    @Pattern(regexp = "[a-z0-9]{17}")
+    private String vin;
 
     @NotBlank(message = "Заполни меня")
     private String color;
