@@ -1,5 +1,6 @@
 package by.itstep.karnei.domain;
 
+import by.itstep.karnei.domain.abstractClasses.AbstractEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,16 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
 @Entity
-public class Car {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(name = "CREATEDDATE", updatable = false)
-    private LocalDateTime createdDate;
-
-    private LocalDateTime updatedDate;
+public class Car extends AbstractEntity {
 
     @NotBlank(message = "Заполни поле")
     private String mark;
@@ -26,7 +18,7 @@ public class Car {
     @NotBlank(message = "Заполни поле")
     private String model;
 
-    @NotBlank
+    @NotBlank(message = "Заполни поле")
     private String registrationNumber;
 
     @NotBlank(message = "Заполни меня")

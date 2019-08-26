@@ -1,8 +1,8 @@
 <table>
     <tr>
         <th>Id</th>
-        <th>Model</th>
         <th>Mark</th>
+        <th>Model</th>
         <th>CreatedDate</th>
         <th>UpdatedDate</th>
         <th>Registration Number</th>
