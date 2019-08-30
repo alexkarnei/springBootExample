@@ -38,10 +38,11 @@
     </#list>
 </table>
 
-<h3> Car edit </h3>
-<#if savingReport??>${savingReport}></#if>
+<h3> Edit car </h3>
+<#if savingReport??>${savingReport}</#if>
 
 <form method="post">
+    <input type="hidden" name="id" value="<#if oneCar??>${oneCar.id}</#if>">
     <input type="text" name="mark" value="<#if oneCar??>${oneCar.mark}</#if>" placeholder="Enter the mark">
     <br><#if markError??>${markError}</#if><br>
     <input type="text" name="model" value="<#if oneCar??>${oneCar.model}</#if>" placeholder="Enter the model">

@@ -13,12 +13,26 @@ public class CarService {
     CarRepo carRepo;
 
     public boolean saveCar(Car car) {
-        if (carRepo.findByVin(car.getVin()) == null) {
-            carRepo.save(car);
-            return true;
+
+        Car carFromDb = carRepo.findByVin(car.getVin());
+
+        if (car.getId() == null) {
+            if (carFromDb == null) {
+                carRepo.save(car);
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+
+            if (carFromDb == null || carFromDb != null && car.getId() == carFromDb.getId()) {
+                carRepo.save(car);
+                return true;
+            } else {
+                return false;
+            }
         }
+
     }
 
     public Iterable<Car> getAll() {
