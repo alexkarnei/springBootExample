@@ -3,6 +3,8 @@ package by.itstep.karnei.service;
 import by.itstep.karnei.domain.Car;
 import by.itstep.karnei.repositiry.CarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,8 +37,9 @@ public class CarService {
 
     }
 
-    public Iterable<Car> getAll() {
-        return carRepo.findAll();
+    public Page<Car> getAll(Pageable pageable) {
+
+        return carRepo.findAll(pageable);
     }
 
     public void remove(Car removeCar) {

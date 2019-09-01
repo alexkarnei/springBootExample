@@ -3,6 +3,10 @@ package by.itstep.karnei.controller;
 import by.itstep.karnei.domain.Car;
 import by.itstep.karnei.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +25,12 @@ public class CarController {
     public String listOfCars(Model model,
                              @RequestParam(required = false, defaultValue = "") Car editCar,
                              @RequestParam(required = false, defaultValue = "") Car removeCar,
-                             @RequestParam(required = false, defaultValue = "") Car repareCar) {
+                             @RequestParam(required = false, defaultValue = "") Car repareCar,
+                             @PageableDefault(sort = {"mark"}, direction = Sort.Direction.ASC) Pageable pageable) {
 
-        model.addAttribute("carsList", carService.getAll());
+        Page<Car> page = carService.getAll(pageable);
+        model.addAttribute("page", page);
+        model.addAttribute("url", "/cars");
 
         /*        Edit exist car        */
         if (editCar != null) {
@@ -44,10 +51,14 @@ public class CarController {
     }
 
     @PostMapping
-    public String addOrUpdateCar(@Valid Car car, BindingResult bindingResult, Model model) {
+    public String addOrUpdateCar(@Valid Car car, BindingResult bindingResult, Model model,
+                                 @PageableDefault(sort = {"mark"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<Car> page = carService.getAll(pageable);
+        model.addAttribute("page", page);
+        model.addAttribute("url", "/cars");
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("carsList", carService.getAll());
+            model.addAttribute("page", page);
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
             model.addAttribute("oneCar", car);
@@ -56,7 +67,7 @@ public class CarController {
             if (carService.saveCar(car)) {
                 return "redirect:cars";
             } else {
-                model.addAttribute("carsList", carService.getAll());
+                model.addAttribute("page", page);
                 model.addAttribute("savingReport", "Car with such vin is already exists!");
                 model.addAttribute("oneCar", car);
                 return "cars";
