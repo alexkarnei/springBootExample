@@ -2,6 +2,7 @@ package by.itstep.karnei.domain;
 
 import by.itstep.karnei.domain.abstractClasses.AbstractEntity;
 import lombok.Data;
+import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

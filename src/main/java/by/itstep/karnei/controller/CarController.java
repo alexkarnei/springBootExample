@@ -26,7 +26,7 @@ public class CarController {
                              @RequestParam(required = false, defaultValue = "") Car editCar,
                              @RequestParam(required = false, defaultValue = "") Car removeCar,
                              @RequestParam(required = false, defaultValue = "") Car repareCar,
-                             @PageableDefault(sort = {"mark"}, direction = Sort.Direction.ASC) Pageable pageable) {
+                             @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
 
         Page<Car> page = carService.getAll(pageable);
         model.addAttribute("page", page);
@@ -52,7 +52,7 @@ public class CarController {
 
     @PostMapping
     public String addOrUpdateCar(@Valid Car car, BindingResult bindingResult, Model model,
-                                 @PageableDefault(sort = {"mark"}, direction = Sort.Direction.ASC) Pageable pageable) {
+                                 @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Car> page = carService.getAll(pageable);
         model.addAttribute("page", page);
         model.addAttribute("url", "/cars");
