@@ -72,14 +72,6 @@ public class CarServiceTest {
     }
 
     @Test
-    public void saveCarTestExistedCarWithChangedVinNegative() {
-        carOne.setId(1L);
-        Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(carTwo);
-        boolean carIsSaved = carService.saveCar(carOne);
-        Assert.assertFalse(carIsSaved);
-    }
-
-    @Test
     public void saveCarTestExistedCarWithNotChangedVinPositive() {
         carOne.setId(1L);
         Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(carOne);
@@ -88,12 +80,20 @@ public class CarServiceTest {
     }
 
     @Test
-    public void saveCarTestExistedCarWithNotChangedVinNegative() {
+    public void saveCarTestExistedCarWithChangeAndWithNotChangedVinNegative() {
         carOne.setId(1L);
         carTwo.setId(2L);
         Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(carTwo);
         boolean carIsSaved = carService.saveCar(carOne);
         Assert.assertFalse(carIsSaved);
+    }
+
+    @Test
+    public void getAll() {
+    }
+
+    @Test
+    public void remove() {
     }
 
     @Test
