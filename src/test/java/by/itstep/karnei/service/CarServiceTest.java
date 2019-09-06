@@ -50,25 +50,50 @@ public class CarServiceTest {
     }
 
     @Test
-    public void saveCarPositiveTest() {
+    public void saveNewCarPositiveTest() {
         Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(null);
         boolean isSave = carService.saveCar(carOne);
         Assert.assertTrue(isSave);
     }
 
-    @Test(expected = AssertionError.class)
-    public void saveCarNegativeTest() {
-        Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(null);
+    @Test
+    public void saveNewCarNegativeTest() {
+        Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(carOne);
         boolean isSave = carService.saveCar(carOne);
         Assert.assertFalse(isSave);
     }
 
     @Test
-    public void getAll() {
+    public void saveCarTestExistedCarWithChangedVinPositive() {
+        carOne.setId(1L);
+        Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(null);
+        boolean carIsSaved = carService.saveCar(carOne);
+        Assert.assertTrue(carIsSaved);
     }
 
     @Test
-    public void remove() {
+    public void saveCarTestExistedCarWithChangedVinNegative() {
+        carOne.setId(1L);
+        Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(carTwo);
+        boolean carIsSaved = carService.saveCar(carOne);
+        Assert.assertFalse(carIsSaved);
+    }
+
+    @Test
+    public void saveCarTestExistedCarWithNotChangedVinPositive() {
+        carOne.setId(1L);
+        Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(carOne);
+        boolean carIsSaved = carService.saveCar(carOne);
+        Assert.assertTrue(carIsSaved);
+    }
+
+    @Test
+    public void saveCarTestExistedCarWithNotChangedVinNegative() {
+        carOne.setId(1L);
+        carTwo.setId(2L);
+        Mockito.when(carRepo.findByVin(carOne.getVin())).thenReturn(carTwo);
+        boolean carIsSaved = carService.saveCar(carOne);
+        Assert.assertFalse(carIsSaved);
     }
 
     @Test
