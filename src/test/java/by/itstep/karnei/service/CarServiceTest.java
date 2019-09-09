@@ -1,7 +1,7 @@
 package by.itstep.karnei.service;
 
 import by.itstep.karnei.domain.Car;
-import by.itstep.karnei.repositiry.CarRepo;
+import by.itstep.karnei.repository.CarRepo;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

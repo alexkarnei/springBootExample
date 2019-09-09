@@ -1,16 +1,15 @@
 package by.itstep.karnei.service;
 
 import by.itstep.karnei.domain.Car;
-import by.itstep.karnei.repositiry.CarRepo;
+import by.itstep.karnei.repository.CarRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class CarService {
+
     @Autowired
     CarRepo carRepo;
 

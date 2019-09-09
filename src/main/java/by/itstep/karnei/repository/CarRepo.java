@@ -1,4 +1,4 @@
-package by.itstep.karnei.repositiry;
+package by.itstep.karnei.repository;
 
 import by.itstep.karnei.domain.Car;
 import org.springframework.data.domain.Page;
