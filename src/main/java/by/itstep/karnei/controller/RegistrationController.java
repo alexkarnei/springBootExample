@@ -1,6 +1,7 @@
 package by.itstep.karnei.controller;
 
 import by.itstep.karnei.domain.User;
+import by.itstep.karnei.dto.CaptchaResponseDto;
 import by.itstep.karnei.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.Map;
 
 @Controller
@@ -24,11 +26,11 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-   /* @Value("${recaptcha.secret}")
+    @Value("${recaptcha.secret}")
     private String secret;
 
     @Autowired
-    RestTemplate restTemplate;*/
+    RestTemplate restTemplate;
 
     @GetMapping("/registration")
     public String registration() {
@@ -38,18 +40,18 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(
             @RequestParam("passwordConfirm") String passwordConfirm,
-//            @RequestParam("g-recaptcha-response") String captchaResponce,
+            @RequestParam("g-recaptcha-response") String captchaResponce,
             @Valid User user,
             BindingResult bindingResult,
             Model model
     ) {
-//        String url = String.format(CAPTCHA_URL, secret, captchaResponce);
-//        System.out.println(url);
-//        CaptchaResponseDto captchaResponseDto = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
-//        System.out.println(captchaResponseDto.toString());
-//        if (!captchaResponseDto.success){
-//            model.addAttribute("captchaError", "Fill Captcha");
-//        }
+        String url = String.format(CAPTCHA_URL, secret, captchaResponce);
+        System.out.println(url);
+        CaptchaResponseDto captchaResponseDto = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
+        System.out.println(captchaResponseDto.toString());
+        if (!captchaResponseDto.isSuccess()){
+            model.addAttribute("captchaError", "Fill Captcha");
+        }
 
         boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
 
