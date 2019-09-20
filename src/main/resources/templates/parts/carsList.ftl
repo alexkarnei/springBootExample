@@ -6,8 +6,8 @@
         <th scope="col">Id</th>
         <th scope="col">Mark</th>
         <th scope="col">Model</th>
-        <th scope="col">CreatedDate</th>
-        <th scope="col">UpdatedDate</th>
+      <#--  <th scope="col">CreatedDate</th>
+        <th scope="col">UpdatedDate</th>-->
         <th scope="col">Vin</th>
         <th scope="col">Color</th>
         <th scope="col">Is deleted</th>
@@ -24,10 +24,10 @@
                 <td>${car.mark}</td></#if>
             <#if car.model??>
                 <td>${car.model}</td></#if>
-            <#if car.createdDate??>
+           <#-- <#if car.createdDate??>
                 <td>${car.createdDate}</td></#if>
             <#if car.updatedDate??>
-                <td>${car.updatedDate}</td></#if>
+                <td>${car.updatedDate}</td></#if>-->
             <#if car.vin??>
                 <td>${car.vin}</td></#if>
             <#if car.color??>

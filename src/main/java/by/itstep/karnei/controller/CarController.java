@@ -2,6 +2,7 @@ package by.itstep.karnei.controller;
 
 import by.itstep.karnei.domain.Car;
 import by.itstep.karnei.service.CarService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
+@Slf4j
 @RequestMapping("cars")
 public class CarController {
     @Autowired
@@ -29,6 +31,9 @@ public class CarController {
                              @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
 
         Page<Car> page = carService.getAll(pageable);
+
+        page.forEach(pgs -> log.debug("{}", pgs.toString()));
+
         model.addAttribute("page", page);
         model.addAttribute("url", "/cars");
 
@@ -54,6 +59,7 @@ public class CarController {
     public String addOrUpdateCar(@Valid Car car, BindingResult bindingResult, Model model,
                                  @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Car> page = carService.getAll(pageable);
+
         model.addAttribute("page", page);
         model.addAttribute("url", "/cars");
 

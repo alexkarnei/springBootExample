@@ -3,6 +3,7 @@ package by.itstep.karnei.controller;
 import by.itstep.karnei.domain.Roles;
 import by.itstep.karnei.domain.User;
 import by.itstep.karnei.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
+@Slf4j
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -46,6 +48,7 @@ public class UserController {
 
     @GetMapping("profile")
     public String getProfile(Model model, @AuthenticationPrincipal User user){
+        log.debug(user.getUsername());
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
 
