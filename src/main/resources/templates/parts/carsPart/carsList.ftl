@@ -1,4 +1,4 @@
-<#import "pager.ftl" as p>
+<#import "../pager.ftl" as p>
 <@p.pager url page/>
 <table class="table">
     <thead class="thead-dark">

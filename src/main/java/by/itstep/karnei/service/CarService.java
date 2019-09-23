@@ -22,8 +22,10 @@ public class CarService {
         if (car.getId() == null) {
             if (carFromDb == null) {
                 carRepo.save(car);
+
                 return true;
             } else {
+                log.debug("Not save {}. A car with such VIN exists.",car.toString());
                 return false;
             }
         } else {
@@ -32,6 +34,7 @@ public class CarService {
                 carRepo.save(car);
                 return true;
             } else {
+                log.debug("Not save {}. A car with such VIN exists.",car.toString());
                 return false;
             }
         }
