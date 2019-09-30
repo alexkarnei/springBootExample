@@ -26,7 +26,7 @@
             </#if>
         </div>
         <div class="form-group">
-            <input type="text" name="color"
+            <input type="color" name="color"
                    class="form-control ${(colorError??)?string('is-invalid', '')}"
                    value="<#if car??>${car.color}</#if>" placeholder="Enter the color">
             <#if colorError??>

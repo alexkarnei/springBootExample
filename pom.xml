@@ -122,11 +122,11 @@
             <version>2.1.7.RELEASE</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>5.2.4</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
