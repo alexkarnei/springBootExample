@@ -14,7 +14,7 @@ public class UsingHistory {
     private Long id;
 
     private String notes;
-    private boolean isFree;
+    private boolean isFree = true;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)

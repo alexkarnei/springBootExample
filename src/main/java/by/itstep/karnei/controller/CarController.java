@@ -32,7 +32,7 @@ public class CarController {
 
         Page<Car> page = carService.getAll(pageable);
 
-        page.forEach(pgs -> log.debug("{}", pgs.toString()));
+       /* page.forEach(pgs -> log.debug("{}", pgs.toString()));*/
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/cars");
