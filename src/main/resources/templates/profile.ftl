@@ -1,6 +1,4 @@
 <#import "parts/pageTemplate.ftl" as pt>
-
-
 <@pt.page>
     <h2>${username}</h2>
     ${message?ifExists}

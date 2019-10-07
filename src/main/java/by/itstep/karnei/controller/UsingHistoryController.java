@@ -22,35 +22,48 @@ public class UsingHistoryController {
     @Autowired
     UsingHistoryService usingHistoryService;
 
+    @GetMapping("history/{car}")
+    public String allCarHistory(
+            Model model,
+            @ModelAttribute UsingHistory usingHistory,
+            @PathVariable Car car,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable
+    ) {
+        Page<UsingHistory> histories = usingHistoryService.getAll(pageable);
+        usingHistory.setCar(car);
+        model.addAttribute("usingHistory", usingHistory);
+        model.addAttribute("page", histories);
+        model.addAttribute("url", "/history");
+        return "history";
+    }
+
     @GetMapping("history")
     public String allHistory(
             Model model,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable
-    ){
+    ) {
         Page<UsingHistory> histories = usingHistoryService.getAll(pageable);
-        model.addAttribute("history", histories);
-
         model.addAttribute("page", histories);
         model.addAttribute("url", "/history");
         return "history";
     }
 
     @PostMapping("history")
-    public String addOrUpdateHistory( @ModelAttribute UsingHistory usingHistory,
-                                 Model model,
-                                 @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
+    public String addOrUpdateHistory(@ModelAttribute UsingHistory usingHistory,
+                                     Model model,
+                                     @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
         Page<UsingHistory> page = usingHistoryService.getAll(pageable);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/history");
 
-            if (usingHistoryService.saveUsingHistory(usingHistory)) {
-                return "redirect:history";
-            } else {
-                model.addAttribute("page", page);
-                model.addAttribute("savingReport", "Fatal Error!!!");
-                model.addAttribute("usingHistory", usingHistory);
-                return "history";
-            }
+        if (usingHistoryService.saveUsingHistory(usingHistory)) {
+            return "redirect:history";
+        } else {
+            model.addAttribute("page", page);
+            model.addAttribute("savingReport", "Fatal Error!!!");
+            model.addAttribute("usingHistory", usingHistory);
+            return "history";
         }
     }
+}

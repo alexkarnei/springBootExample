@@ -6,12 +6,8 @@
         <th scope="col">Id</th>
         <th scope="col">Notes</th>
         <th scope="col">Is Free</th>
-        <#--  <th scope="col">CreatedDate</th>
-          <th scope="col">UpdatedDate</th>-->
         <th scope="col">Owner</th>
         <th scope="col">Car</th>
-       <#-- <th scope="col"></th>
-        <th scope="col"></th>-->
     </tr>
     </thead>
     <#list page.content as history>
@@ -27,10 +23,7 @@
                 <td>${history.owner.id}</td></#if>
             <#if history.car.id??>
                 <td>${history.car.id}</td></#if>
-           <#-- <td><a href="cars?editCar=${car.id}">edit</a></td>
-            <td>${car.deleted?then('<a href="cars?repareCar=${car.id}">repare</a>',
-                '<a href="cars?removeCar=${car.id}">remove</a>')}
-            </td>-->
+
         </tr>
         </tbody>
     <#else>

@@ -6,11 +6,10 @@
         <th scope="col">Id</th>
         <th scope="col">Mark</th>
         <th scope="col">Model</th>
-      <#--  <th scope="col">CreatedDate</th>
-        <th scope="col">UpdatedDate</th>-->
         <th scope="col">Vin</th>
         <th scope="col">Color</th>
         <th scope="col">Is deleted</th>
+        <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
     </tr>
@@ -37,6 +36,8 @@
             <td><a href="cars?editCar=${car.id}">edit</a></td>
             <td>${car.deleted?then('<a href="cars?repareCar=${car.id}">repare</a>',
                 '<a href="cars?removeCar=${car.id}">remove</a>')}
+            </td>
+            <td><a href="history/${car.id}">Add history</a>
             </td>
         </tr>
         </tbody>
