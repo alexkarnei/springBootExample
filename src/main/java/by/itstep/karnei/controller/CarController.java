@@ -28,7 +28,7 @@ public class CarController {
                              @RequestParam(required = false, defaultValue = "") Car editCar,
                              @RequestParam(required = false, defaultValue = "") Car removeCar,
                              @RequestParam(required = false, defaultValue = "") Car repareCar,
-                             @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
+                             @PageableDefault(sort = {"mark"}, direction = Sort.Direction.ASC) Pageable pageable) {
 
         Page<Car> page = carService.getAll(pageable);
 

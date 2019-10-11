@@ -48,17 +48,31 @@ public class UsingHistoryController {
         return "history";
     }
 
-    @PostMapping("history")
+    @PostMapping("history/{id}")
     public String addOrUpdateHistory(@ModelAttribute UsingHistory usingHistory,
                                      Model model,
+                                     @PathVariable Long id,
                                      @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        return getString(usingHistory, model, pageable);
+    }
+
+    @PostMapping("history")
+    public String addHistory(@ModelAttribute UsingHistory usingHistory,
+                                     Model model,
+                                     @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
+
+        return getString(usingHistory, model, pageable);
+    }
+
+
+    private String getString(@ModelAttribute UsingHistory usingHistory, Model model, @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
         Page<UsingHistory> page = usingHistoryService.getAll(pageable);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/history");
 
         if (usingHistoryService.saveUsingHistory(usingHistory)) {
-            return "redirect:history";
+            return "redirect:/history";
         } else {
             model.addAttribute("page", page);
             model.addAttribute("savingReport", "Fatal Error!!!");

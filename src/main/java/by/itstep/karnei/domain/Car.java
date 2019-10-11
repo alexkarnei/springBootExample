@@ -1,6 +1,7 @@
 package by.itstep.karnei.domain;
 
 import by.itstep.karnei.domain.abstractClasses.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.context.annotation.Scope;
 
@@ -32,5 +33,6 @@ public class Car extends AbstractEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             mappedBy = "car")
+            @JsonIgnore
     Set<UsingHistory> carsHistory;
 }
